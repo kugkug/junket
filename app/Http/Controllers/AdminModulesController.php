@@ -12,7 +12,7 @@ class AdminModulesController extends Controller
         
         $this->data['settings'] = $request->current_user_settings ? 
         [ 'theme_class' => $themes[$request->current_user_settings['theme_mode']] ] :
-        [ 'theme_class' => '' ];
+        [ 'theme_class' => $themes['light'] ];
         
     }
     public function login() {
