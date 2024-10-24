@@ -25,30 +25,30 @@ class AdminModulesController extends Controller
 
     //Companies
     public function companies() {
-        return view('admin.companies.index');
+        return view('admin.companies.index', $this->data);
     }
 
     public function company_registration() {
-        return view('admin.companies.create');
+        return view('admin.companies.create', $this->data);
     }
 
     public function company_edit() {
-        return view('admin.companies.edit');
+        return view('admin.companies.edit',$this->data);
     }
 
     public function accounts() {
-        return view('admin.accounts.index');
+        return view('admin.accounts.index',$this->data);
     }
 
     public function account_create() {
-        return view('admin.accounts.create');
+        return view('admin.accounts.create', $this->data);
     }
     
     public function account_edit() {
-        return view('admin.accounts.edit');
+        return view('admin.accounts.edit', $this->data);
     }
 
     public function reports() {
-        return view('admin.reports');
+        return view('admin.reports', $this->data);
     }
 }
