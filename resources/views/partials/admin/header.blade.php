@@ -19,16 +19,16 @@
   	<link rel="stylesheet" href="{{ asset('adminlte3.2/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
   	<link rel="stylesheet" href="{{ asset('adminlte3.2/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}"> 
   	<link rel="stylesheet" href="{{ asset('adminlte3.2/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}"> 
-
-
   	<link rel="stylesheet" href="{{ asset('adminlte3.2/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/styles.css') }}">
+
+    
 
     <title>Dashboard | {{ $app_name }}</title>
 </head>
 <body>
     
-<body class="sidebar-mini layout-fixed dark-mode">
+<body class="sidebar-mini layout-fixed {{ $settings['theme_class']['body'] }}">
     <div class="wrapper">
         <nav class="main-header navbar navbar-expand ">
             <!-- Left navbar links -->
@@ -83,10 +83,8 @@
 
               <li>
                 <a class="nav-link" data-toggle="mode" href="#">
-                  {{-- <i class="fas fa-moon"></i> --}}
-                  <i class="far fa-moon"></i>
+                  <i class="{{ $settings['theme_class']['icon'] }} fa-moon"></i>
                 </a>
-                
               </li>
               
               

@@ -12,6 +12,8 @@
     <strong>Copyright &copy; 2024 <a href="/clients">{{$app_name}}</a>.</strong> 
   </footer>
 </div>
+
+@include('partials.assets.fullscreenloader')
 </body>
 </html>
 

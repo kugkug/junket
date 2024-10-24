@@ -21,15 +21,11 @@
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
-            <form action="/execute/login" method="POST">
+            <form method="post" action="/execute/login">
                 @csrf
-                @error('email')
-                    <p class="text-danger">
-                        {{$message}}
-                    </p>    
-                @enderror
+                
                 <div class="input-group mb-3">
-                    <input type="email" name="email" class="form-control" placeholder="Username">
+                    <input type="email" name="email" class="form-control" placeholder="Username" value="{{ old('email')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -44,9 +40,14 @@
                         </div>
                     </div>
                 </div>
-                {{-- <button type="submit" class="btn btn-primary btn-block">Sign In</button> --}}
-                <a href="/admin" class="btn btn-danger btn-block" target="_blank">Admin Page</a>
-                <a href="/cashier" class="btn btn-primary btn-block" target="_blank">Cashier Page</a>
+                @error('message')
+                    <p class="text-danger">
+                        {{$message}}
+                    </p>
+                @enderror
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                {{-- <a href="/admin" class="btn btn-danger btn-block" target="_blank">Admin Page</a>
+                <a href="/cashier" class="btn btn-primary btn-block" target="_blank">Cashier Page</a> --}}
             </form>
         </div>
     </div>

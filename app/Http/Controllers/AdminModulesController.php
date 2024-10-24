@@ -6,12 +6,21 @@ use Illuminate\Http\Request;
 
 class AdminModulesController extends Controller
 {
+    public $data = [];
+    public function __construct(Request $request) {
+        $themes = config('custom.theme_mode');
+        
+        $this->data['settings'] = $request->current_user_settings ? 
+        [ 'theme_class' => $themes[$request->current_user_settings['theme_mode']] ] :
+        [ 'theme_class' => '' ];
+        
+    }
     public function login() {
         return view('login');
     }
 
-    public function admin_dashboard() {
-        return view('admin.dashboard');
+    public function admin_dashboard(Request $request) {
+        return view('admin.dashboard', $this->data);
     }
 
     //Companies
