@@ -22,6 +22,5 @@ class GlobalException extends Exception
                 'message' => $this->message,
             ],
         ], $this->status_code);
-        
     }
 }

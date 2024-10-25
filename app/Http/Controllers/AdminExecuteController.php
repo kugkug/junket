@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Helpers\ApiHelper;
+use App\Helpers\GlobalHelper;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -35,9 +36,10 @@ class AdminExecuteController extends Controller
         } catch (Exception $e) {
             Log::channel('info')->info($e->getMessage());
 
-            return back()->withErrors([
-                'message' => 'Cannot Continue, please call system administrator'
-            ])->onlyInput('email');
+            return GlobalHelper::webErrorResponse('');
+            // return back()->withErrors([
+            //     'message' => 'Cannot Continue, please call system administrator'
+            // ])->onlyInput('email');
         }
     }
 

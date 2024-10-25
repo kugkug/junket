@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ApiHelper;
+use App\Helpers\GlobalHelper;
 use App\Models\UserSettings;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,10 +16,12 @@ class UserSettingsController extends Controller
 
         try {
             $response = ApiHelper::execute($request, '/api/settings/update-mode', 'POST');
-            Log::channel('info')->info(json_encode($response));
-            
+            if ($response['status'] === 'error') {
+                return GlobalHelper::ajaxErrorResponse();
+            }
+
             $mode = $request->theme_mode;
-            
+
             if ($mode == 'dark') {
             $js =" $($('[data-toggle=mode]').find('i')[0]).removeClass('fas').addClass('far');
                 $('aside')
@@ -32,20 +35,13 @@ class UserSettingsController extends Controller
             }
 
             $js .= " $('body').toggleClass('dark-mode', { duration: 10 }); ";
-                    
-            if ($response['status'] === 'error') {
-                return response()->json([
-                    'js' => "_confirm('alert', 'Cannot continue, please call system administrator!');"
-                ]);
-            }
-            
-            return response()->json([
-                'js' => $js,
-                'mode' => $mode
-            ]);
+
+            return GlobalHelper::ajaxSuccessRespone($js);
 
         } catch (Exception $e) {
             Log::channel('info')->info($e->getMessage());
+            return GlobalHelper::webErrorResponse();
         }
     }
+
 }

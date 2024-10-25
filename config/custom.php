@@ -27,6 +27,10 @@ return [
             'body' => 'dark-mode',
             'icon' => 'far'
         ],
-        
-    ]
+    ],
+
+    'messages' => [
+        'default' => 'Cannot continue, please call system administrator!',
+    ],
+
 ];

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AdminModulesController::class, 'login'])->name('login');
 
-Route::middleware(['auth:sanctum', 'current_user'])->group(function() {
+Route::middleware(['auth:sanctum', 'current_user', 'is_admin_web'])->group(function() {
     Route::group(['prefix' => 'admin'], function() {
         Route::get('/', [AdminModulesController::class, 'admin_dashboard'])->name('admin_dashboard');
         Route::get('/dashboard', [AdminModulesController::class, 'admin_dashboard'])->name('admin_dashboard');
@@ -17,19 +17,17 @@ Route::middleware(['auth:sanctum', 'current_user'])->group(function() {
         Route::get('/accounts', [AdminModulesController::class, 'accounts'])->name('accounts');
         Route::get('/reports', [AdminModulesController::class, 'reports'])->name('reports');
     });
+
+    Route::group(['prefix' => 'company'], function() {
+        Route::get('/registration', [AdminModulesController::class, 'company_registration'])->name('company_registration');
+        Route::get('/edit', [AdminModulesController::class, 'company_edit'])->name('company_edit');
+    });
+
+    Route::group(['prefix' => 'account', 'current_user'], function() {
+        Route::get('/add', [AdminModulesController::class, 'account_create'])->name('account_create');
+        Route::get('/edit', [AdminModulesController::class, 'account_edit'])->name('account_edit');
+    });
 });
-
-Route::group(['prefix' => 'company'], function() {
-    Route::get('/registration', [AdminModulesController::class, 'company_registration'])->name('company_registration');
-    Route::get('/edit', [AdminModulesController::class, 'company_edit'])->name('company_edit');
-});
-
-Route::group(['prefix' => 'account'], function() {
-    Route::get('/add', [AdminModulesController::class, 'account_create'])->name('account_create');
-    Route::get('/edit', [AdminModulesController::class, 'account_edit'])->name('account_edit');
-});
-
-
 
 Route::group(['prefix' => 'cashier'], function() {
     Route::get('/', [CashierModulesController::class, 'cashier_dashboard'])->name('cashier_dashboard');

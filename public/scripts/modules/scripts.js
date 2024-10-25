@@ -27,7 +27,7 @@ $(document).ready(function () {
     }
 });
 
-async function ajaxRequest(sUrl = "", sData = "", sLoadParent = "") {
+function ajaxRequest(sUrl = "", sData = "", sLoadParent = "") {
     $.ajax({
         url: sUrl,
         type: "POST",
@@ -48,7 +48,10 @@ async function ajaxRequest(sUrl = "", sData = "", sLoadParent = "") {
         },
         error: function (e) {
             $(".div-loader").hide();
-            console.log(e);
+            _confirm(
+                "alert",
+                "Cannot continue, please call system administrator!"
+            );
         },
     });
 }

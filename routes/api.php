@@ -17,7 +17,7 @@ Route::prefix('admin')->group(function() {
     Route::post('login', [UserController::class, 'loginAdminUser']);
 });
 
-Route::middleware(['auth:sanctum'])->group(function() {
+Route::middleware(['auth:sanctum', 'current_user', 'is_admin_api'])->group(function() {
 
     Route::prefix('admin')->group(function() {
         Route::get('logout', [UserController::class, 'logoutAdminUser'])->name('api_admin_logout');
