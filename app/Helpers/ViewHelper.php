@@ -106,8 +106,8 @@ class ViewHelper {
             ";
 
         return "
-            $('.div-table-data').html(\"".$table."\");
-            $('.paginator').html(\"".$pager."\");
+            $('.div-table-data').html(\"".preg_replace('/\s+/', ' ', $table)."\");
+            $('.paginator').html(\"".preg_replace('/\s+/', ' ', $pager)."\");
             _execWidget();
         ";
         return [
