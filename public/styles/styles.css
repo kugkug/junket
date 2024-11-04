@@ -26,3 +26,18 @@ body {
         height: 40px;
     }
 }
+
+textarea {
+    resize: none;
+}
+
+.image-upload,
+.image-uploaded {
+    height: 200px;
+    width: 200px;
+    cursor: pointer;
+
+    &:hover {
+        border: 1px solid #007bff;
+    }
+}

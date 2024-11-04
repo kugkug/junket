@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ApiHelper;
 use App\Helpers\GlobalHelper;
 use App\Models\UserSettings;
 use Exception;
@@ -15,9 +14,9 @@ class UserSettingsController extends Controller
     public function update(Request $request, UserSettings $userSettings) {
 
         try {
-            $response = ApiHelper::execute($request, '/api/settings/update-mode', 'POST');
+            $response = apiHelper()->execute($request, '/api/settings/update-mode', 'POST');
             if ($response['status'] === 'error') {
-                return GlobalHelper::ajaxErrorResponse();
+                return globalHelper()->ajaxErrorResponse();
             }
 
             $mode = $request->theme_mode;
@@ -26,21 +25,25 @@ class UserSettingsController extends Controller
             $js =" $($('[data-toggle=mode]').find('i')[0]).removeClass('fas').addClass('far');
                 $('aside')
                     .removeClass('sidebar-light-info')
-                    .addClass('sidebar-dark-info', { duration: 100 }); ";
+                    .addClass('sidebar-dark-info', { duration: 100 }); 
+                    theme = 'dark';
+                ";
             } else {
             $js ="$($('[data-toggle=mode]').find('i')[0]).removeClass('far').addClass('fas');
                 $('aside')
                     .removeClass('sidebar-dark-info')
-                    .addClass('sidebar-light-info', { duration: 100 }); ";
+                    .addClass('sidebar-light-info', { duration: 100 }); 
+                    theme = 'light';
+                ";
             }
 
             $js .= " $('body').toggleClass('dark-mode', { duration: 10 }); ";
 
-            return GlobalHelper::ajaxSuccessRespone($js);
+            return globalHelper()->ajaxSuccessRespone($js);
 
         } catch (Exception $e) {
             Log::channel('info')->info($e->getMessage());
-            return GlobalHelper::webErrorResponse();
+            return globalHelper()->webErrorResponse();
         }
     }
 

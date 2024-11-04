@@ -20,7 +20,7 @@ class UserSettingsController extends Controller
         try {
             $validated = Validator::make($request->all(), [
                 'theme_mode' => 'required|max:255',
-            ]);            
+            ]);
             
             if ($validated->fails()) {
                 throw new GlobalException($validated->errors()->first());
@@ -43,6 +43,5 @@ class UserSettingsController extends Controller
             Log::channel('info')->info($e->getMessage());
             throw new GlobalException();
         }
-        
     }
 }

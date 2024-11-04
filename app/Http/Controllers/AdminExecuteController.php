@@ -14,7 +14,7 @@ class AdminExecuteController extends Controller
 {
     public function login(Request $request) {
         try {
-            $response = ApiHelper::execute($request, '/api/admin/login', 'POST');
+            $response = apiHelper()->execute($request, '/api/admin/login', 'POST');
 
             if ($response['status'] === 'error') {
                 return back()->withErrors([
@@ -22,7 +22,7 @@ class AdminExecuteController extends Controller
                 ])->onlyInput('email');
             }
 
-            ApiHelper::custom_session(
+            apiHelper()->custom_session(
                 $request,
                 'set',
                 [
@@ -35,16 +35,12 @@ class AdminExecuteController extends Controller
 
         } catch (Exception $e) {
             Log::channel('info')->info($e->getMessage());
-
-            return GlobalHelper::webErrorResponse('');
-            // return back()->withErrors([
-            //     'message' => 'Cannot Continue, please call system administrator'
-            // ])->onlyInput('email');
+            return globalHelper()->webErrorResponse('');
         }
     }
 
     public function logout(Request $request) {
-        $response = ApiHelper::execute($request, '/api/admin/logout', 'GET');
+        $response = apiHelper()->execute($request, '/api/admin/logout', 'GET');
 
         if ($response['status'] === 'error') {
             return back()->withErrors([
@@ -52,7 +48,7 @@ class AdminExecuteController extends Controller
             ])->onlyInput('email');
         }
 
-        ApiHelper::custom_session($request, 'flush', '');
+        apiHelper()->custom_session($request, 'flush', '');
         $request->session()->invalidate();
 
         return redirect('/');

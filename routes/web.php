@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminExecuteController;
 use App\Http\Controllers\AdminModulesController;
 use App\Http\Controllers\CashierModulesController;
+use App\Http\Controllers\CompanyExecuteController;
 use App\Http\Controllers\UserSettingsController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,4 +48,11 @@ Route::group(['prefix' => 'execute'], function() {
     Route::get('logout', [AdminExecuteController::class, 'logout'])->name('web_execute_logout');
 
     Route::post('settings', [UserSettingsController::class, 'update'])->name('web_update_settings');
+    
+    Route::group(['prefix' => 'company'], function() {
+        Route::post('/list', [CompanyExecuteController::class, 'list'])->name('company_list');
+        Route::post('/save', [CompanyExecuteController::class, 'save'])->name('company_save');
+        Route::post('/update', [CompanyExecuteController::class, 'update'])->name('company_update');
+        Route::post('/delete', [CompanyExecuteController::class, 'delete'])->name('company_delete');
+    });
 });

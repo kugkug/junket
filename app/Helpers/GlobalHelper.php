@@ -6,6 +6,7 @@ namespace App\Helpers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class GlobalHelper {
@@ -14,7 +15,7 @@ class GlobalHelper {
         return config('custom.messages');
     }
 
-    private static function getViewData(Request $request) {
+    private function getViewData(Request $request) {
         $themes = config('custom.theme_mode');
         
         $viewData['settings'] = $request->current_user_settings ? 
@@ -24,7 +25,7 @@ class GlobalHelper {
         return $viewData;
     }
 
-    public static function webErrorResponse(string $message=''): RedirectResponse {
+    public function webErrorResponse(string $message=''): RedirectResponse {
         $messages = self::getMessages();
         
         $msg = ( ! empty($message) ) ? $message : $messages['default'];
@@ -33,18 +34,22 @@ class GlobalHelper {
         ])->withInput();
     }
 
-    public static function ajaxErrorResponse(string $message=''): JsonResponse {
+    public function ajaxErrorResponse(string $message='', string $url=''): JsonResponse {
+        Log::channel('info')->info($message);
         $messages = self::getMessages();
         $msg = ( ! empty($message) ) ? $message : $messages['default'];
-        return response()->json(['js' => "_confirm('alert', '".$msg."');"], 400);
+        $js = $url == "" ? 
+            ['js' => "_confirm('alert', '".$msg."');"] : 
+            ['js' => "_confirmAdd('".$msg."', '".$url."');"];
+        return response()->json($js, 200);
     }
 
-    public static function ajaxSuccessRespone(string $scripts): JsonResponse {
-        $scripts = preg_replace('/\s+/S', "", $scripts);
+    public function ajaxSuccessRespone(string $scripts): JsonResponse {
+        $scripts = preg_replace('/\r\n+/S', "", $scripts);
         return response()->json(['js' => $scripts], 200);
     }
 
-    public static function makeView(string $view, array $data, Request $request): View {
+    public function makeView(string $view, array $data, Request $request): View {
         return view($view, $data)->with(self::getViewData($request));
     }
 

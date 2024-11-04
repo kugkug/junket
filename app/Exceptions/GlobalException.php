@@ -18,9 +18,7 @@ class GlobalException extends Exception
     public function render() {         
         return response()->json([
             'status' => 'error',
-            'info' => [
-                'message' => $this->message,
-            ],
+            'message' => $this->message,
         ], $this->status_code);
     }
 }
