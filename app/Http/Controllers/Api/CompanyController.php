@@ -42,7 +42,7 @@ class CompanyController extends Controller
                 $image = $request->file('Image');
                 $ext = $image->getClientOriginalExtension();
                 $filename = $validated['validated']['code']."_image.".$ext;
-                $filename = $request->file('Image')->storeAs('images/', $filename, 'public');
+                $filename = $request->file('Image')->storeAs('', $filename, 'companies_images');
 
                 $validated['validated']['photo'] = $validated['validated']['code']."_image.".$ext;
             }

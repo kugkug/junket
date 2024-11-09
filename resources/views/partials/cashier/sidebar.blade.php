@@ -36,7 +36,7 @@
             <a href="/cashier/enrollments" class="nav-link">
               <i class=" nav-icon fas fa-user-tag"></i>
               <p>
-                Enrollment
+                Players
               </p>
             </a>
           </li>
@@ -56,6 +56,14 @@
                 <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 End Of Shift
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/execute/logout" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+              <p>
+                Log Out
               </p>
             </a>
           </li>

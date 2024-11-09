@@ -45,6 +45,20 @@ return [
             'throw' => false,
         ],
 
+        'companies_images' => [
+            'driver' => 'local',
+            'root' => public_path() ."/images/companies",
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'passports_images' => [
+            'driver' => 'local',
+            'root' => public_path() ."/images/passports",
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

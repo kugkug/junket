@@ -18,7 +18,7 @@ class AdminExecuteController extends Controller
 
             if ($response['status'] === 'error') {
                 return back()->withErrors([
-                    'message' => $response['info']['message']
+                    'message' => $response['message']
                 ])->onlyInput('email');
             }
 
@@ -31,7 +31,11 @@ class AdminExecuteController extends Controller
                 ],
             );
 
-            return redirect('admin/dashboard');
+            if ($response['info']['user_type'] === 'admin') {
+                return redirect('admin/dashboard');
+            } else {
+                return redirect('cashier/dashboard');
+            }
 
         } catch (Exception $e) {
             Log::channel('info')->info($e->getMessage());
@@ -40,7 +44,7 @@ class AdminExecuteController extends Controller
     }
 
     public function logout(Request $request) {
-        $response = apiHelper()->execute($request, '/api/admin/logout', 'GET');
+        $response = apiHelper()->execute($request, '/api/logout', 'GET');
 
         if ($response['status'] === 'error') {
             return back()->withErrors([

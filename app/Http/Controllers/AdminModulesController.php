@@ -36,10 +36,16 @@ class AdminModulesController extends Controller
     }
 
     public function account_create(Request $request) {
+        $this->data['companies'] = lookupHelper()->getCompanies();
+        $this->data['positions'] = config('custom.user_type');
         return globalHelper()->makeView('admin.accounts.create', $this->data, $request);
     }
     
-    public function account_edit(Request $request) {
+    public function account_edit($id, Request $request) {
+        $this->data['companies'] = lookupHelper()->getCompanies();
+        $this->data['positions'] = config('custom.user_type');
+        $this->data['account_info'] = lookupHelper()->getAccountInfoViaId($id); 
+        
         return globalHelper()->makeView('admin.accounts.edit', $this->data, $request);
     }
 

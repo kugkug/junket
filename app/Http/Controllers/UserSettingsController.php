@@ -39,7 +39,7 @@ class UserSettingsController extends Controller
 
             $js .= " $('body').toggleClass('dark-mode', { duration: 10 }); ";
 
-            return globalHelper()->ajaxSuccessRespone($js);
+            return globalHelper()->ajaxSuccessResponse($js);
 
         } catch (Exception $e) {
             Log::channel('info')->info($e->getMessage());

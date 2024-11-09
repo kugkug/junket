@@ -310,6 +310,29 @@ function _confirmAdd(content, url) {
         },
     });
 }
+
+function _confirmUpdate(content, url) {
+    $.confirm({
+        title: "System Notification",
+        content: content,
+        icon: "fas fa-info-circle",
+        type: "green",
+        animation: "scale",
+        closeAnimation: "scale",
+        opacity: 0.5,
+        theme: theme,
+        buttons: {
+            confirm: {
+                text: "Ok",
+                btnClass: "btn btn-primary",
+                action: function () {
+                    location = url;
+                },
+            },
+        },
+    });
+}
+
 function _confirm(type, content) {
     let color = "";
 

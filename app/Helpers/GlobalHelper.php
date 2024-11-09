@@ -38,13 +38,11 @@ class GlobalHelper {
         Log::channel('info')->info($message);
         $messages = self::getMessages();
         $msg = ( ! empty($message) ) ? $message : $messages['default'];
-        $js = $url == "" ? 
-            ['js' => "_confirm('alert', '".$msg."');"] : 
-            ['js' => "_confirmAdd('".$msg."', '".$url."');"];
+        $js = ['js' => "_confirm('alert', '".$msg."');"];
         return response()->json($js, 200);
     }
 
-    public function ajaxSuccessRespone(string $scripts): JsonResponse {
+    public function ajaxSuccessResponse(string $scripts): JsonResponse {
         $scripts = preg_replace('/\r\n+/S', "", $scripts);
         return response()->json(['js' => $scripts], 200);
     }
@@ -53,4 +51,11 @@ class GlobalHelper {
         return view($view, $data)->with(self::getViewData($request));
     }
 
+    public function genDefaultPassword() {
+        return substr(str_shuffle('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz!@#$%^&*()_-+'), 0, 8);
+    }
+
+    public function genPlayerCode() {
+        return "PL-".date("YmdHis").substr(str_shuffle('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
+    }
 }
