@@ -23,7 +23,8 @@ class PlayerController extends Controller
             $players = Player::orderBy('lastname', 'asc')
             ->with('nationality')
             ->with('transactions')
-            ->paginate(2);
+            ->with('agent')
+            ->paginate(5);
             
             return [
                 'status' => 'ok',

@@ -95,6 +95,7 @@ class ValidatorHelper {
                     'nationality_id' => "required|integer|max:6",
                     'arrival_date' => "required|string|max:255",
                     'deposit' => "required|string|max:255",
+                    'agent_code' => "required|string|max:255",
                 ];
             break;
 
@@ -115,16 +116,24 @@ class ValidatorHelper {
                 ];
             break;
 
+            case 'agents_save':
+                return [
+                    // 'photo' => "somteimtes|image|mimes:jpeg,png,jpg,gif|max:2048",
+                    'firstname' => "required|string|max:255",
+                    'middlename' => "required|string|max:255",
+                    'lastname' => "required|string|max:255",
+                    'phone' => "required|string|max:255",
+                    'email' => "sometimes|email|max:255",
+                ];
+            break;
+
             case 'transactions_save':
                 return [
-                    'player_id' => "required|integer|max:255",
+                    'photo' => "required|image|mimes:jpeg,png,jpg,gif|max:2048",
                     'availment_id' => "required|integer|max:255",
-                    'accomodation' => "required|string|max:255",
-                    'room' => "required|string|max:255",
-                    'restaurant' => "required|string|max:255",
-                    'foods' => "required|string|max:255",
-                    'receipt' => "required|string|max:255",
+                    'reference_number' => "required|string|max:255",
                     'total_amount' => "required|string|max:255",
+                    'remarks' => "sometimes|string",
                 ];
             break;
 

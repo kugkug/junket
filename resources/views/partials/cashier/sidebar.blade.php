@@ -1,4 +1,4 @@
-<aside class="main-sidebar elevation-4 sidebar-dark-info">
+<aside class="main-sidebar elevation-4 {{ $settings['theme_class']['sidebar'] }}">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       {{-- <img src="{{ asset('images/logo1.jpg') }}" alt="App LOGO" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
@@ -28,6 +28,14 @@
                 <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/cashier/agents" class="nav-link">
+              <i class=" nav-icon fas fa-user-tag"></i>
+              <p>
+                Agents
               </p>
             </a>
           </li>

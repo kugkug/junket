@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <x-helpers.imageupload />    
+                            <x-helpers.imageupload caption='Company Logo' />    
                         </div>
 
                         <div class="col-md-9">

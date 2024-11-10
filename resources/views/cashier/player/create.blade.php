@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <x-helpers.imageupload />    
+                            <x-helpers.imageupload caption='Passport Image' />    
                         </div>
                         <div class="col-md-9">
                             <div class="row">
@@ -84,6 +84,26 @@
                                 </div>
 
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Agent</label>
+                                        <select class="form-control" data-key="AgentCode" data="req">
+                                            <option value=""></option>
+                                            @if (count($agents) > 0)
+                                                @foreach ($agents as $agent)
+                                                <option value="{{$agent['agent_code']}}">
+                                                    {{ ucwords(strtolower($agent['lastname'] . " " . $agent['firstname'].", ". $agent['middlename'])) }}
+                                                </option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
                         </div>
                     </div>                
                 </div>

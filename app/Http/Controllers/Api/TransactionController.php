@@ -15,6 +15,7 @@ class TransactionController extends Controller
     public function list($player_id) {
         try {
             $transactions = PlayerTransaction::where('player_id', $player_id)
+            ->with('availment')
             ->orderBy('created_at', 'desc')
             ->paginate(2);
             
@@ -29,26 +30,28 @@ class TransactionController extends Controller
         }
     }
 
-    public function save($id, Request $request)
+    public function save($player_id, Request $request)
     {
         try {
+            
             $validated = validatorHelper()->validate('transactions_save', $request);
             
             if ($validated['status'] === "error") {
                 return $validated;
             }
 
-            // return $validated;
-            // if (isset($validated['validated']['photo'])) {
-            //     $image = $request->file('Image');
-            //     $ext = $image->getClientOriginalExtension();
-            //     $filename = $validated['validated']['code']."_image.".$ext;
-            //     $filename = $request->file('Image')->storeAs('images/', $filename, 'public');
+            if (isset($validated['validated']['photo'])) {
+                $image = $request->file('Image');
+                $ext = $image->getClientOriginalExtension();
+                $filename = $validated['validated']['reference_number']."_image.".$ext;
+                
+                $request->file('Image')->storeAs('', $filename, 'receipts_images');
+                $validated['validated']['photo'] = $filename;
+                
+            }
 
-            //     $validated['validated']['photo'] = $validated['validated']['code']."_image.".$ext;
-            // }
-
-            $transaction = PlayerTransaction::create($validated['validated']);
+            $transaction_data = array_merge($validated['validated'], ['player_id' => $player_id]);
+            $transaction = PlayerTransaction::create($transaction_data);
             
             return [
                 'status' => 'ok',

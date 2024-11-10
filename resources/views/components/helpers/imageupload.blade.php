@@ -1,8 +1,11 @@
 <div class="div-image-uploader">
-    <div class="card-body box-profile">
+    <div class="card-body box-profile text-center">
         <div class="text-center">
-        <img class="profile-user-img img-fluid img-circle image-uploaded" src="{{asset('images/system/no_company_image.png')}}" alt="Image Upload" title="Update Image">
+            <img class="profile-user-img img-fluid img-circle image-uploaded" src="{{asset('images/system/no_company_image.png')}}" alt="Image Upload" title="Update Image">
+            
         </div>
+        <hr />
+        {{ $caption }}
     </div>
 
     <div class="modal fade" aria-modal="true" role="dialog">

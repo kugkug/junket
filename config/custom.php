@@ -15,6 +15,10 @@ return [
         '6' => env('In-Active', 'In-Active'),
     ],
 
+    'statuses' => [
+        '1' => env('Active', 'Active'),
+    ],
+
     'theme_mode' => [
         'light' => 
             [

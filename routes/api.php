@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\AgentController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\PlayerController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserSettingsController;
+use App\Models\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +55,11 @@ Route::middleware(['auth:sanctum', 'current_user'])->group(function() {
         Route::post('save', [PlayerController::class, 'save'])->name('api_players_save');
         Route::post('update/{id}', [PlayerController::class, 'update'])->name('api_players_update');
         Route::post('delete/{id}', [PlayerController::class, 'delete'])->name('api_players_delete');
+    });
+
+    Route::prefix('agents')->group(function() {
+        Route::post('list', [AgentController::class, 'list'])->name('api_agents_list');
+        Route::post('save', [AgentController::class, 'save'])->name('api_agents_save');
     });
 
     Route::prefix('transactions')->group(function() {

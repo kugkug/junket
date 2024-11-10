@@ -56,6 +56,10 @@ class GlobalHelper {
     }
 
     public function genPlayerCode() {
-        return "PL-".date("YmdHis").substr(str_shuffle('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
+        return "PLR-".date("YmdHis").substr(str_shuffle('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
+    }
+
+    public function genAgentCode() {
+        return "AGT-".date("YmdHis").substr(str_shuffle('1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 6);
     }
 }

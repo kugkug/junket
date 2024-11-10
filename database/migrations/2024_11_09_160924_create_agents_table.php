@@ -11,22 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('players', function (Blueprint $table) {
+        Schema::create('agents', function (Blueprint $table) {
             $table->id();
-            $table->string('player_code')->unique();
+            $table->string('agent_code')->unique();
             $table->string('firstname');
             $table->string('middlename')->nullable();
             $table->string('lastname');
-            $table->bigInteger('nationality_id')->constrained('nationalities');
-            $table->string('arrival_date')->nullable();
             $table->string('photo')->nullable();
-            $table->string('deposit');
-            $table->string('checkout')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->unique();
             $table->bigInteger('status');
-            $table->bigInteger('availment_id')->constrained('food_beverages')->nullable();
-            $table->string('agent_code')->constrained('agents');
-            $table->string('checked_in_by')->nullable();
-            $table->string('checked_out_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -37,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('players');
+        Schema::dropIfExists('agents');
     }
 };

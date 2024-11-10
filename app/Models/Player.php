@@ -20,4 +20,8 @@ class Player extends Model {
     public function nationality(): HasOne {
         return $this->hasOne(Nationality::class, 'id', 'nationality_id');
     }
+
+    public function agent(): HasOne {
+        return $this->hasOne(Agent::class, 'agent_code', 'agent_code');
+    }
 }

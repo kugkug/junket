@@ -52,6 +52,13 @@ return [
             'throw' => false,
         ],
 
+        'receipts_images' => [
+            'driver' => 'local',
+            'root' => public_path() ."/images/receipts",
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'passports_images' => [
             'driver' => 'local',
             'root' => public_path() ."/images/passports",

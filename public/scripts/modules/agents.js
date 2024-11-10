@@ -1,6 +1,6 @@
 $(document).ready(function () {
     if ($(".div-table-data").length) {
-        _fetch("/execute/transactions/list/" + $("#id").val());
+        _fetch("/execute/agents/list");
     }
 
     $("[data-trigger]").on("click", function (e) {
@@ -18,19 +18,8 @@ $(document).ready(function () {
                 }
 
                 let json_data_form = JSON.parse(_collectFields(parentForm));
-                let image = $($(".image-upload").next("[type=file]"))[0]
-                    .files[0];
-                let form_data = new FormData();
-                form_data.append("Image", image);
-                $.each(json_data_form, function (i, j) {
-                    form_data.append(i, j);
-                });
 
-                ajaxSubmit(
-                    "/execute/transactions/save/" + +$("#id").val(),
-                    form_data,
-                    $(this)
-                );
+                ajaxRequest("/execute/agents/save", json_data_form, $(this));
                 break;
             case "update":
                 if (!_checkFormFields(parentForm)) {
@@ -43,7 +32,7 @@ $(document).ready(function () {
                 let data_form_update = JSON.parse(_collectFields(parentForm));
                 data_form_update = {
                     ...data_form_update,
-                    Id: $("#id").val(),
+                    Id: $(this).attr("data-id"),
                 };
                 ajaxRequest(
                     "/execute/players/update",
@@ -65,10 +54,7 @@ function _execWidget() {
         $(".page-link").on("click", function (e) {
             e.preventDefault();
             let pageno = $(this).attr("data-page");
-
-            _fetch(
-                "/execute/transactions/" + $("#id").val() + "/list?" + pageno
-            );
+            _fetch("/execute/agents/list?" + pageno);
         });
     }
 
