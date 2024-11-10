@@ -32,8 +32,7 @@ class AccountExecuteController extends Controller
                 return globalHelper()->ajaxErrorResponse($response['message']);
             } else {
                 return globalHelper()->ajaxSuccessResponse("
-                    _confirmAdd('User succesfully saved!<br /> please check default username and password below.<br /><br /> Username: <h3 class=\'text-strong\'>{$response['username']}</h3><br />Password: <h3 class=\'text-strong\'>{$response['password']}</h3>')",
-                    '/admin/accounts'
+                    _confirmAdd('User succesfully saved!<br /> please check default username and password below.<br /><br /> Username: <h3 class=\'text-strong\'>{$response['username']}</h3><br />Password: <h3 class=\'text-strong\'>{$response['password']}</h3>', '/admin/accounts')",
                 );
                 
                 // return globalHelper()->ajaxSuccessResponse(
