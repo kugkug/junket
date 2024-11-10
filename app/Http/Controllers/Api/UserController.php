@@ -153,7 +153,8 @@ class UserController extends Controller
 
             return [
                 'status' => 'ok',
-                'info' => $user
+                'username' => $user['username'],
+                'password' => $password,
             ];
             
         } catch(GlobalException $ge) {

@@ -34,6 +34,9 @@ Route::middleware(['auth:sanctum', 'current_user', 'is_admin_web'])->group(funct
     });
 });
 
+Route::group(['prefix' => 'execute'], function() {
+    Route::post('login', [AdminExecuteController::class, 'login'])->name('web_execute_login');
+});
 Route::middleware(['auth:sanctum', 'current_user'])->group(function() {
     
     Route::group(['prefix' => 'cashier'], function() {
@@ -58,9 +61,7 @@ Route::middleware(['auth:sanctum', 'current_user'])->group(function() {
         Route::get('/edit', [CashierModulesController::class, 'enrollment_edit'])->name('enrollment_edit');
     });
 
-
     Route::group(['prefix' => 'execute'], function() {
-        Route::post('login', [AdminExecuteController::class, 'login'])->name('web_execute_login');
         Route::get('logout', [AdminExecuteController::class, 'logout'])->name('web_execute_logout');
 
         Route::post('settings', [UserSettingsController::class, 'update'])->name('web_update_settings');

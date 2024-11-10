@@ -31,11 +31,14 @@ class AccountExecuteController extends Controller
             if ($response['status'] == "error") {
                 return globalHelper()->ajaxErrorResponse($response['message']);
             } else {
-                // return globalHelper()->ajaxErrorResponse('User succesfully saved!<br />Please check the list to check the username and password.', '/admin/accounts');
-                
-                return globalHelper()->ajaxSuccessResponse(
-                    "_confirmAdd('info', 'User succesfully saved!<br />Please check the list to check the username and password!');"
+                return globalHelper()->ajaxSuccessResponse("
+                    _confirmAdd('User succesfully saved!<br /> please check default username and password below.<br /><br /> Username: <h3 class=\'text-strong\'>{$response['username']}</h3><br />Password: <h3 class=\'text-strong\'>{$response['password']}</h3>')",
+                    '/admin/accounts'
                 );
+                
+                // return globalHelper()->ajaxSuccessResponse(
+                //     "_confirmAdd('info', 'User succesfully saved!<br />');"
+                // );
             }
         } catch (Exception $e) {
             Log::channel('info')->info($e->getMessage());

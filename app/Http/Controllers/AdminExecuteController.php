@@ -30,7 +30,7 @@ class AdminExecuteController extends Controller
                     'sess_token' => $response['info']['access_token']
                 ],
             );
-
+            
             if ($response['info']['user_type'] === 'admin') {
                 return redirect('admin/dashboard');
             } else {
